@@ -1,4 +1,4 @@
-package com.example.flowstudy.ui
+package com.example.flowstudy.ui.fragment
 
 import androidx.lifecycle.*
 import com.example.flowstudy.data.local.GrowZone
@@ -21,7 +21,7 @@ class PlantListViewModel @Inject constructor(private val plantRepository: PlantR
     val snackbar: LiveData<String?>
         get() = _snackbar
 
-    private val _spinner = MutableLiveData<Boolean>(false)
+    private val _spinner = MutableLiveData(false)
     val spinner: LiveData<Boolean>
         get() = _spinner
 
@@ -38,7 +38,6 @@ class PlantListViewModel @Inject constructor(private val plantRepository: PlantR
     init {
         clearGrowZoneNumber()
         growZoneFlow.mapLatest { growZone ->
-
             _spinner.value = true
             if (growZone == NoGrowZone) {
                 plantRepository.tryUpdateRecentPlantsCache()
